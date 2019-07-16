@@ -1,42 +1,67 @@
 //iki yapi kullanacagiz
 //1.provider 2. consumer provider tarafindan gönderilen datalari kullanmak icin--saglayici ve tüketici
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+
+
 
 const UserContext=React.createContext();
 
 //provider,consumer
+const reducer=(state,action)=>{
+    switch(action.type){
+        case "DELETE_USER":
+        return{
+            ...state,
+            users: state.users.filter(user=>action.payload!==user.id)
+        }
+        case "ADD_USER":
+        return{
+            ...state,
+            users:[...state.users,action.payload]
+           // users: state.users.push(action.payload)
+        }
+        default:
+        return state
+    }
+}
 
-class UserProvider extends Component {
+export class UserProvider extends Component {
+
     state={
         users:[
           {
-            id:1,
+            id:"unique-1",
             name:"cemil Kaa",
             salary:"4500",
             department:"IT"
           },
           {
-            id:2,
+            id:"unique-2",
             name:"cemil Kaa",
             salary:"4500",
             department:"IT"
           },
           {
-            id:3,
+            id:"unique-3",
             name:"cemil Kaa",
             salary:"4500",
             department:"IT"
           },
           {
-            id:4,
+            id:"unique-4",
             name:"cemil Kaa",
             salary:"4500",
             department:"IT"
           },
-        ]
+        ],
+        dispatch : action => {
+            this.setState(state=>reducer(state,action))
+        }
+
       }
-  render() {
+
+
+  render() {//value context in icindeki userprovider in icindeki state i gönderen bir props //{this.props.children} App componentini temsil ediyor
     return (
      <UserContext.Provider value={this.state}>
          {this.props.children}
@@ -47,3 +72,14 @@ class UserProvider extends Component {
 const UserConsumer=UserContext.Consumer;
 export default UserConsumer;
 
+/*
+state={
+    a:10,
+    b:20,
+    c:30
+}
+{
+...state // yukaridaki degerleri buraya tasiyorS
+}
+
+*/
