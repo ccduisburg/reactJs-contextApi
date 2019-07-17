@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import posed from 'react-pose'
 import UserConsumer from "../context";//contextjs ten dispatcher i kullanmamiz icin
+import axios from 'axios'
 
-var uniqid=require('uniqid');
 
 const Animation=posed.div({
     visible:{opacity:1,
@@ -52,21 +52,20 @@ class AddUser extends Component {
         //     })
         // }
 
-        addUser=(dispatch,e)=>{
+        addUser=async (dispatch,e)=>{
           e.preventDefault();
           const {name,department,salary}=this.state;
         
 
-          const newUser={
-              id:uniqid(),
+          const newUser={          
               name,
               department,   
-              salary
-          
+              salary         
 
         }
+        const response=await axios.post("http://localhost:3004/users",newUser)
       
-        dispatch({type:"ADD_USER",payload:newUser})
+        dispatch({type:"ADD_USER",payload:response.data})
     }        
 
   render() {

@@ -1,8 +1,9 @@
 //iki yapi kullanacagiz
 //1.provider 2. consumer provider tarafindan gönderilen datalari kullanmak icin--saglayici ve tüketici
 import React, { Component } from 'react'
+import Axios from 'axios';
 
-
+//reducer in görevi stati güncellemek
 
 const UserContext=React.createContext();
 
@@ -28,31 +29,7 @@ const reducer=(state,action)=>{
 export class UserProvider extends Component {
 
     state={
-        users:[
-          {
-            id:"unique-1",
-            name:"cemil Kaa",
-            salary:"4500",
-            department:"IT"
-          },
-          {
-            id:"unique-2",
-            name:"cemil Kaa",
-            salary:"4500",
-            department:"IT"
-          },
-          {
-            id:"unique-3",
-            name:"cemil Kaa",
-            salary:"4500",
-            department:"IT"
-          },
-          {
-            id:"unique-4",
-            name:"cemil Kaa",
-            salary:"4500",
-            department:"IT"
-          },
+        users:[     
         ],
         dispatch : action => {
             this.setState(state=>reducer(state,action))
@@ -60,7 +37,14 @@ export class UserProvider extends Component {
 
       }
 
-
+   componentDidMount= async ()=> {
+    const response=await Axios.get("http://localhost:3004/users")//veri dönene kadar bekleyecek (await) sadece async fonksiyonlarda kullaniliyor    
+    this.setState({
+        users:response.data
+    })
+       
+   }
+   
   render() {//value context in icindeki userprovider in icindeki state i gönderen bir props //{this.props.children} App componentini temsil ediyor
     return (
      <UserContext.Provider value={this.state}>

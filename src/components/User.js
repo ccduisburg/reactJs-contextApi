@@ -1,8 +1,8 @@
 import React,{Component} from 'react'
 import  PropTypes from 'prop-types'
 import UserConsumer from "../context";
-
-
+import axios from 'axios'
+//https://jsonplaceholder.typicode.com/ //jsondata
 class User extends Component {
     state={
         isVisible:false
@@ -20,8 +20,11 @@ class User extends Component {
     })
     }
 //arrow function otomatik olarak bind islemini yapiyor.
-    onDeleteUser=(dispatch,e)=>{
-      const {id,deleteUser}=this.props;
+    onDeleteUser=async (dispatch,e)=>{
+      const {id}=this.props;
+      //delete reques
+      await axios.delete(`http://localhost:3004/users/${id}`);     
+      
       dispatch({type:"DELETE_USER",payload:id})
       //Consumer Dispatch
     }
@@ -29,6 +32,12 @@ class User extends Component {
 //fakat componentle gelen metodlarda miras aldigi kilasi temsil ediyor
 //onclick={this.onClickEvent.bind(this,34)} event le deger gönderebiliriz. bunun icin bind(this,) ilk parametre this olmak zorunda
 //event te kendi verdiigimiz deger parametresi ilk olarak veriyoruz onClickEvent(number,e)
+
+componentWillUnmount(){//Bu method componentler kaldirilirken calisir
+    console.log("Component will unmount")
+    // bu method komponenti kaldirmadan hemen önce yapilmasi gereken islemer icin uygun yerdir.
+    
+}
     render() {
         const {name,department,salary}=this.props;
         const {isVisible}=this.state;
