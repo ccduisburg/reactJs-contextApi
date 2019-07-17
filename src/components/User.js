@@ -23,7 +23,7 @@ class User extends Component {
     onDeleteUser=async (dispatch,e)=>{
       const {id}=this.props;
       //delete reques
-      await axios.delete(`http://localhost:3004/users/${id}`);     
+      await axios.delete(`http://github.com/ccduisburg/reactJs-contextApi/api/db.json/users/${id}`);     
       
       dispatch({type:"DELETE_USER",payload:id})
       //Consumer Dispatch

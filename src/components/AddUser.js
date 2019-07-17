@@ -63,7 +63,9 @@ class AddUser extends Component {
               salary         
 
         }
-        const response=await axios.post("http://localhost:3004/users",newUser)
+//        reactJs-contextApi/api/db.json 
+       // github.com/ccduisburg/reactJs-contextApi/api/db.json
+        const response=await axios.post("http://github.com/ccduisburg/reactJs-contextApi/api/db.json/users",newUser)
       
         dispatch({type:"ADD_USER",payload:response.data})
     }        
