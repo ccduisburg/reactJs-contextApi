@@ -76,7 +76,7 @@ componentWillUnmount(){//Bu method componentler kaldirilirken calisir
         name: PropTypes.string.isRequired,
         salary: PropTypes.string.isRequired,
         department: PropTypes.string.isRequired,
-        id:PropTypes.string.isRequired
+        //id:PropTypes.string.isRequired
 
     }
 

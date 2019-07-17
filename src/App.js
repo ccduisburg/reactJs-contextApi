@@ -1,25 +1,57 @@
 import React,{Component} from 'react'
-//import User from './components/User'
-import Navbar from './components/Navbar'
+import User from './components/User'
+import Navbar from './layout/Navbar'
 import Users from './components/Users'
 import './App.css'
 import AddUser from './components/AddUser';
+import {BrowserRouter as Router,Route,Switch,Link} from "react-router-dom"
+import NotFound from './pages/NotFound'
+import Contribute from './pages/Contribute'
 
-
+const Home=()=>{
+  return(
+    <h3>
+      Home Page
+    </h3>
+  )
+}
+const About=()=>{
+  return(
+    <h3>
+      About Page
+    </h3>
+  )
+}
 class App extends Component {
   //silme fonksiyonunu props olarak child alara aktariyoruz cünkü bütün komponentlerin state lerine ulasmak istiyoruz.
-  
-  render(){
-  return (
-    <div className="container">
-
-    <Navbar
+  /*
+   <Navbar
     title="User App" />
     <hr/>
     <AddUser/>
     <Users/>
+    //---------------------------------------
+   <Route exact path="/" component={Home}/>
+
+        <Route exact path="/about" component={About}/> */
+  render(){
+  return (
+    <Router>
+      <div className="container">    
+        <Navbar title="User App" />
+          <hr/>
+         
+         <Switch>
+          <Route exact path="/" component={Users}/>     
+          <Route exact path="/add" component={AddUser}/>   
+          <Route exact path="/github" component={Contribute}/>   
+          <Route component={NotFound}/>    
+         </Switch>       
+          
+        </div>
+
+    </Router>
    
-    </div>
   );
 }
 }

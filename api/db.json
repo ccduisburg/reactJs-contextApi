@@ -1,28 +1,10 @@
 {
   "users": [
     {
-      "id": "unique-1",
       "name": "cemil Kabakci",
-      "salary": "4500",
-      "department": "IT"
-    },
-    {
-      "name": "cc",
-      "department": "Duisburg",
-      "salary": "4545454",
-      "id": "Uj-XQIV"
-    },
-    {
-      "name": "d",
-      "department": "s",
-      "salary": "f",
-      "id": "gZSFIZT"
-    },
-    {
-      "name": "Igor Macuro",
-      "department": "EDV",
-      "salary": "2500",
-      "id": "vkTRq3l"
+      "department": "IT",
+      "salary": "5000",
+      "id": 1
     }
   ]
 }
