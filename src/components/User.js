@@ -1,7 +1,8 @@
 import React,{Component} from 'react'
 import  PropTypes from 'prop-types'
 import UserConsumer from "../context";
-import axios from 'axios'
+import axios from "axios";
+import {Link} from "react-router-dom";
 //https://jsonplaceholder.typicode.com/ //jsondata
 class User extends Component {
     state={
@@ -23,7 +24,7 @@ class User extends Component {
     onDeleteUser=async (dispatch,e)=>{
       const {id}=this.props;
       //delete reques
-      await axios.delete(`http://github.com/ccduisburg/reactJs-contextApi/api/db.json/users/${id}`);     
+      await axios.delete(`http://localhost:3004/users/${id}`);     
       
       dispatch({type:"DELETE_USER",payload:id})
       //Consumer Dispatch
@@ -34,12 +35,11 @@ class User extends Component {
 //event te kendi verdiigimiz deger parametresi ilk olarak veriyoruz onClickEvent(number,e)
 
 componentWillUnmount(){//Bu method componentler kaldirilirken calisir
-    console.log("Component will unmount")
+
     // bu method komponenti kaldirmadan hemen önce yapilmasi gereken islemer icin uygun yerdir.
     
-}
-    render() {
-        const {name,department,salary}=this.props;
+}    render() {
+        const {id,name,department,salary}=this.props;
         const {isVisible}=this.state;
         return (
             <UserConsumer>
@@ -56,7 +56,8 @@ componentWillUnmount(){//Bu method componentler kaldirilirken calisir
                                      </div>
                                     { isVisible ? <div className="card-body">
                                      <p div className="card-text">Maas :{salary}</p>
-                                     <p div className="card-text">Department :{department}</p>        
+                                     <p div className="card-text">Department :{department}</p>   
+                                     <Link to = {`edit/${id}`}  className="btn btn-dark btn-block"> Update User</Link>                                
                                      </div>:null
                                     }
                                      </div>
@@ -76,7 +77,7 @@ componentWillUnmount(){//Bu method componentler kaldirilirken calisir
         name: PropTypes.string.isRequired,
         salary: PropTypes.string.isRequired,
         department: PropTypes.string.isRequired,
-        //id:PropTypes.string.isRequired
+        id:PropTypes.string.isRequired
 
     }
 

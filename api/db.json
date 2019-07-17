@@ -1,3 +1,22 @@
 {
-  "users": []
+  "users": [
+    {
+      "name": "eeeeee",
+      "department": "rrrr",
+      "salary": "ddd",
+      "id": 1
+    },
+    {
+      "name": "cxxxx",
+      "department": "ffdfdd",
+      "salary": "45",
+      "id": 2
+    },
+    {
+      "name": "xxxx",
+      "department": "vvvv",
+      "salary": "7776",
+      "id": 3
+    }
+  ]
 }

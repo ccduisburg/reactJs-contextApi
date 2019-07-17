@@ -20,10 +20,17 @@ const reducer=(state,action)=>{
             ...state,
             users:[...state.users,action.payload]
            // users: state.users.push(action.payload)
-        }
-        default:
-        return state
+        }      
+    
+    case "UPDATE_USER":
+    return{
+        ...state,
+        users:state.users.map(user=>user.id===action.payload.id ? action.payload:user)
+    
     }
+    default:
+    return state
+}
 }
 
 export class UserProvider extends Component {
@@ -56,14 +63,3 @@ export class UserProvider extends Component {
 const UserConsumer=UserContext.Consumer;
 export default UserConsumer;
 
-/*
-state={
-    a:10,
-    b:20,
-    c:30
-}
-{
-...state // yukaridaki degerleri buraya tasiyorS
-}
-
-*/
