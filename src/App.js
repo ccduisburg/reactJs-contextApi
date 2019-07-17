@@ -5,12 +5,14 @@ import Users from './components/Users'
 import './App.css'
 import AddUser from './components/AddUser';
 
+
 class App extends Component {
   //silme fonksiyonunu props olarak child alara aktariyoruz cünkü bütün komponentlerin state lerine ulasmak istiyoruz.
   
   render(){
   return (
     <div className="container">
+
     <Navbar
     title="User App" />
     <hr/>
