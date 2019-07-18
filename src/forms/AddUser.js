@@ -21,11 +21,20 @@ class AddUser extends Component {
         visible:false,
         name:"",
         department:"",
-        salary:""
+        salary:"",
+        error:false
 
     
     }
     
+    validateForm=()=>{
+     const{name,salary,department}=this.state;
+     if(name===""||salary===""||department===""){
+         return false;
+     }
+     return true;
+    }
+
     changeVisibility=(e)=>{
       this.setState({visible:!this.state.visible})
     }
@@ -54,8 +63,7 @@ class AddUser extends Component {
 
         addUser=async (dispatch,e)=>{
           e.preventDefault();
-          const {name,department,salary}=this.state;
-        
+          const {name,department,salary}=this.state;        
 
           const newUser={          
               name,
@@ -63,6 +71,12 @@ class AddUser extends Component {
               salary         
 
         }
+         if(!this.validateForm()){
+             this.setState({
+                 error:true
+             })
+             return;
+         }
         
         const response=await axios.post("http://localhost:3004/users",newUser)
       
@@ -70,7 +84,7 @@ class AddUser extends Component {
     }        
 
   render() {
-      const {visible,name,salary,department}=this.state;
+      const {visible,name,salary,department,error}=this.state;
         return <UserConsumer>
                 {value=>{
                     const {dispatch}=value;
@@ -84,6 +98,13 @@ class AddUser extends Component {
                            <h4>Add UserForm</h4>
                            </div>        
                            <div className="card-body">
+                           {
+                               error?
+                               <div className="alert alert-danger">
+                               Bilgilerinizi Kontrol ediniz!
+                               </div>
+                               :null
+                           }
                             <form onSubmit={this.addUser.bind(this,dispatch)}>
                                   <div className="form-group">
                                   <label htmlFor="name">Name</label>
